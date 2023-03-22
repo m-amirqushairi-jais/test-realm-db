@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "realm": "^11.5.2"
+  }
+}
