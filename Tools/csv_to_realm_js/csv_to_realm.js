@@ -4,10 +4,18 @@ const csvParser = require('csv-parser');
 const Realm = require('realm');
 
 const inputFolder = '../../csv'; // Replace with your CSV files folder path
-const outputRealm = 'cdc_test.realm'; // Replace with your desired Realm database file path
+const outputRealm = '../../realm/cdc_test.realm'; // Replace with your desired Realm database file path
 
 async function main() {
-  const csvFiles = fs.readdirSync(inputFolder).filter(file => file.endsWith('.csv'));
+  const inputFiles = process.argv.slice(2);
+  let csvFiles;
+
+  if (inputFiles.length > 0) {
+    csvFiles = inputFiles.filter(file => file.endsWith('.csv'));
+  } else {
+    csvFiles = fs.readdirSync(inputFolder).filter(file => file.endsWith('.csv'));
+    csvFiles = csvFiles.map(file => path.join(inputFolder, file));
+  }
 
   const realmConfig = {
     path: outputRealm,
@@ -16,19 +24,18 @@ async function main() {
   };
 
   for (const csvFile of csvFiles) {
-    const filePath = path.join(inputFolder, csvFile);
-    const columns = await parseCsvHeader(filePath);
+    const columns = await parseCsvHeader(csvFile);
     const schemaName = getSchemaName(csvFile);
     const schema = createRealmSchema(schemaName, columns);
 
     realmConfig.schema.push(schema);
 
     const realm = new Realm(realmConfig);
-    await processCsvFile(filePath, realm, schema);
+    await processCsvFile(csvFile, realm, schema);
     realm.close();
   }
 
-  console.log(`CSV files in '${inputFolder}' have been converted to Realm database '${outputRealm}'.`);
+  console.log(`CSV files have been converted to Realm database '${outputRealm}'.`);
 }
 
 function parseCsvHeader(csvFile) {
