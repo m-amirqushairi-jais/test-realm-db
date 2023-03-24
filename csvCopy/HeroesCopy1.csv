@@ -1,0 +1,59 @@
+id,japaneseName,hiraganaName,englishName,releaseLaunch,weaponType,rangeType,hpUnit,poiseUnit,attackSpeedUnit,moveSpeedUnit,criticalUnit,weightUnit
+int,string,string,string,int,string,string,int,int,int,int,int,int
+1001,曹操,そうそう,Cao Cao,1,Sword,Melee,100,100,100,100,2,90
+1002,孫堅,そんけん,Sun Jian,1,Heavy Sword,Melee,0,0,0,0,0,0
+1003,劉備,りゅうび,Liu Bei,1,Double Sword,Range,50,110,50,200,10,0
+1004,呂布,りょふ,Lu Bu,1,Spear,Melee,0,0,0,0,0,0
+1005,夏侯惇,かこうとん,Xiahou Dun,1,Sword,Melee,0,0,0,0,0,0
+1006,夏侯淵,かこうえん,Xiahou Yuan,1,Bow,Range,0,0,0,0,0,0
+1007,袁紹,えんしょう,Yuan Shao,1,Cane,Range,0,0,0,0,0,0
+1008,袁術,えんじゅつ,Yuan Shu,0,null,null,0,0,0,0,0,0
+1009,周瑜,しゅうゆ,Zhou Yu,1,Sword,Melee,0,0,0,0,0,0
+1010,黄蓋,こうがい,Huang Gai,0,null,null,0,0,0,0,0,0
+1011,関羽,かんう,Guan Yu,1,Spear,Melee,100,75,150,75,6,180
+1012,張飛,ちょうひ,Zhang Fei,1,Spear,Melee,120,50,200,50,6,180
+1013,曹洪,そうこう,Cao Hong,1,Claw,Melee,0,0,0,0,0,0
+1014,曹仁,そうじん,Cao Ren,1,Stick,Melee,0,0,0,0,0,0
+1015,陳到,ちんとう,Chen Dao,1,Scythe,Range,0,0,0,0,0,0
+1016,盧植,ろしょく,Lu Zhi,0,null,null,0,0,0,0,0,0
+1017,朱儁,しゅしゅん,Zhu Jun,0,null,null,0,0,0,0,0,0
+1018,何進,かしん,He Jin,0,null,null,0,0,0,0,0,0
+1019,諸葛瑾,しょかつきん,Zhuge Jin,1,Gloves,Melee,0,0,0,0,0,0
+1020,張邈,ちょうばく,Zhang Miao,0,null,null,0,0,0,0,0,0
+1021,鮑信,ほうしん,Bao Xin,0,null,null,0,0,0,0,0,0
+1022,陸績,りくせき,Lu Ji,0,null,null,0,0,0,0,0,0
+1023,麋竺,びじく,Mi Zhu,1,Dagger,Range,0,0,0,0,0,0
+1024,陳震,ちんしん,Chen Zhen,0,null,null,0,0,0,0,0,0
+1025,朱治,しゅち,Zhu Zhi,1,Fan,Range,0,0,0,0,0,0
+1026,祖茂,そも,Zu Mao,0,null,null,0,0,0,0,0,0
+1027,黄祖,こうそ,Huang Zu,0,null,null,0,0,0,0,0,0
+1028,孫乾,そんけん,Sun Qian,1,Scroll,Range,0,0,0,0,0,0
+1029,韓当,かんとう,Han Dang,0,Sword,Melee,0,0,0,0,0,0
+1030,孫策,そんさく,Sun Ce,1,Double Sword,Range,0,0,0,0,0,0
+1031,孫権,そんけん,Sun Quan,1,Heavy Sword,Melee,0,0,0,0,0,0
+1032,程普,ていふ,Cheng Pu,1,Staff,Range,0,0,0,0,0,0
+1033,諸葛亮,しょかつりょう,Zhuge Liang,1,Fan,Range,40,60,200,50,20,0
+1034,趙雲,ちょううん,Zhao Yun,1,Spear,Melee,0,0,0,0,0,0
+1035,公孫瓚,こうそんさん,Gongsun Zan,1,Sword,Melee,0,0,0,0,0,0
+1036,貂蝉,ちょうせん,Diao Chan,1,Puppet,Range,0,0,0,0,0,0
+1037,皇甫嵩,こうほすう,Huangfu Song,0,null,null,0,0,0,0,0,0
+1038,陳宮,ちんきゅう,Chen Gong,0,null,null,0,0,0,0,0,0
+1039,田豊,でんほう,Tian Feng,0,null,null,0,0,0,0,0,0
+1040,荀彧,じゅんいく,Xun Yu,1,Puppet,Range,0,0,0,0,0,0
+1041,郭嘉,かくか,Guo Jia,1,Nothing,Range,0,0,0,0,0,0
+1042,董卓,とうたく,Dong Zhuo,1,Sword,Melee,0,0,0,0,0,0
+1043,張角,ちょうかく,Zhang Jiao,1,Staff,Range,0,0,0,0,0,0
+1044,張宝,ちょうほう,Zhang Bao,1,Staff,Range,0,0,0,0,0,0
+1045,張梁,ちょうりょう,Zhang Liang,1,Fist,Melee,0,0,0,0,0,0
+1046,華雄,かゆう,Hua Xiong,0,null,null,0,0,0,0,0,0
+1047,李儒,りじゅ,Li Ru,0,null,null,0,0,0,0,0,0
+1048,李傕,りかく,Li Jue,0,null,null,0,0,0,0,0,0
+1049,郭汜,かくし,Guo Si,0,null,null,0,0,0,0,0,0
+1050,徐栄,じょえい,Xu Rong,0,null,null,0,0,0,0,0,0
+2001,十常侍,じゅうじょうじ,Ten Eunuchs,0,null,null,0,0,0,0,0,0
+2002,蔡瑁,さいぼう,Cai Mao,0,null,null,0,0,0,0,0,0
+2003,顔良,がんりょう,Yan Liang,0,null,null,0,0,0,0,0,0
+2004,文醜,ぶんしゅう,Wen Chou,0,null,null,0,0,0,0,0,0
+2005,劉表,りゅうひょう,Liu Biao,0,null,null,0,0,0,0,0,0
+2007,蒯越,かいえつ,Kuai Yue,0,null,null,0,0,0,0,0,0
+2008,麹義,きくぎ,Qu Yi,0,null,null,0,0,0,0,0,0
