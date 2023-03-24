@@ -1,20 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 const csvParser = require('csv-parser');
+const xlsx = require('xlsx');
 const Realm = require('realm');
 
-const defaultInputFolder = 'csv_files'; // Replace with your CSV files folder path
+const defaultInputFolder = 'csv_files'; // Replace with your files folder path
 const defaultOutputRealm = 'default.realm'; // Replace with your desired default Realm database file path
 
 async function main() {
   const { inputFiles, inputFolder, outputRealm } = parseArguments();
-  let csvFiles;
+  let dataFiles;
 
   if (inputFiles.length > 0) {
-    csvFiles = inputFiles.filter(file => file.endsWith('.csv'));
+    dataFiles = inputFiles.filter(file => file.endsWith('.csv') || file.endsWith('.xlsx'));
   } else {
-    csvFiles = fs.readdirSync(inputFolder).filter(file => file.endsWith('.csv'));
-    csvFiles = csvFiles.map(file => path.join(inputFolder, file));
+    dataFiles = fs.readdirSync(inputFolder).filter(file => file.endsWith('.csv') || file.endsWith('.xlsx'));
+    dataFiles = dataFiles.map(file => path.join(inputFolder, file));
   }
 
   const realmConfig = {
@@ -23,19 +24,26 @@ async function main() {
     schemaVersion: 1,
   };
 
-  for (const csvFile of csvFiles) {
-    const columns = await parseCsvHeader(csvFile);
-    const schemaName = getSchemaName(csvFile);
+  for (const dataFile of dataFiles) {
+    const isCsv = dataFile.endsWith('.csv');
+    const columns = isCsv ? await parseCsvHeader(dataFile) : await parseXlsxHeader(dataFile);
+    const schemaName = getSchemaName(dataFile);
     const schema = createRealmSchema(schemaName, columns);
 
     realmConfig.schema.push(schema);
 
     const realm = new Realm(realmConfig);
-    await processCsvFile(csvFile, realm, schema);
+
+    if (isCsv) {
+      await processCsvFile(dataFile, realm, schema);
+    } else {
+      await processXlsxFile(dataFile, realm, schema);
+    }
+
     realm.close();
   }
 
-  console.log(`CSV files have been converted to Realm database '${outputRealm}'.`);
+  console.log(`Data files have been converted to Realm database '${outputRealm}'.`);
 }
 
 function parseArguments() {
@@ -102,6 +110,76 @@ function processCsvFile(csvFile, realm, schema) {
       .on('end', resolve)
       .on('error', reject);
   });
+}
+
+function parseXlsxHeader(xlsxFile) {
+  return new Promise((resolve, reject) => {
+    const workbook = xlsx.readFile(xlsxFile);
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+    const headers = jsonData[0];
+
+    resolve(headers);
+  });
+}
+
+async function processXlsxFile(xlsxFile, realm, schema) {
+  const workbook = xlsx.readFile(xlsxFile);
+  const sheetName = workbook.SheetNames[0];
+  const jsonData = [];
+  const jsonDataTemp = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+  jsonDataTemp.forEach((res) => {
+    jsonData.push(res)
+  });
+  // const worksheet = workbook.Sheets[sheetName];
+  // const jsonData = xlsx.utils.sheet_to_json(worksheet);
+  const dataRows = jsonData;
+  for (const dataRow of dataRows) {
+    const row = {};
+    console.log(`the dataRow: ${dataRow}`);
+    console.log(JSON.stringify(dataRow, null, 4));
+
+
+    for (const key in dataRow) {
+      console.log(`the dataRow key: ${key}`);
+
+      row[key] = dataRow[key];
+    }
+
+    console.log(`the row: ${row}`);
+    console.log(JSON.stringify(row, null, 4));
+  }
+
+  realm.write(() => {
+    for (const dataRow of dataRows) {
+      const row = {};
+
+      for (const key in dataRow) {
+        row[key] = dataRow[key];
+      }
+
+      realm.create(schema.name, row);
+    }
+  });
+    
+  // Reading our test file
+  const file = xlsx.readFile(xlsxFile);
+  let data = []
+  const sheets = file.SheetNames
+    
+  for(let i = 0; i < sheets.length; i++)
+  {
+    console.log(i);
+    const temp = xlsx.utils.sheet_to_json(file.Sheets[sheets[i]])
+    temp.forEach((res) => {
+      data.push(res)
+    })
+  }
+    
+  // Printing data
+  console.log("Data value")
+  // console.log(data)
 }
 
 main().catch((error) => {
